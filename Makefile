@@ -4,5 +4,5 @@ install:
 gendiff:
 	node bin/gendiff.js
 
-lint: 
+lint:
 	npx eslint .
