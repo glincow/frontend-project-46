@@ -1,5 +1,5 @@
 import { readFileSync } from 'node:fs';
 
-export const parse = (path) => {
-    return JSON.parse(readFileSync(path));
-}
+const parse = (path) => JSON.parse(readFileSync(path));
+
+export default parse;
