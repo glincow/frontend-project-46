@@ -6,3 +6,6 @@ gendiff:
 
 lint:
 	npx eslint .
+
+test:
+	npx jest
