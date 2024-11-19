@@ -9,3 +9,6 @@ lint:
 
 test:
 	npx jest
+
+test-cov: 
+	npx jest --collectCoverage
