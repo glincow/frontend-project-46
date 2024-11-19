@@ -10,7 +10,7 @@ on:
     branches: [ "main" ]
 
 jobs:
-  build:
+  test:
 
     runs-on: ubuntu-latest
 
@@ -29,3 +29,19 @@ jobs:
     - run: make install
     - run: make lint
     - run: make test
+ 
+  coverage:
+     needs: [ test ]
+     name: coverage
+     runs-on: ubuntu-latest
+     steps:
+     - uses: actions/checkout@master
+     - uses: actions/setup-node@master
+       with:
+         node-version: '12'
+     - run: make test-cov 
+     - uses: paambaati/codeclimate-action@v2.2.4
+       env:
+         CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
+       with:
+         coverageCommand: make test-cov 
