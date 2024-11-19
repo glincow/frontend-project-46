@@ -33,7 +33,7 @@ const compare = (json1, json2) => {
     }
     return 0;
   });
-  
+
   return `{\n ${sortedResult.join('\n ')}\n}`;
 };
 
