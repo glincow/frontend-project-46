@@ -11,7 +11,7 @@ test('compare empty objects', () => {
   expect(compare({}, {})).toBe('{\n \n}');
 });
 
-test('compare', () => {
+test('compare json', () => {
   const json1 = parse(getFixturePath('file1.json'));
   const json2 = parse(getFixturePath('file2.json'));
   const expectedResult = `{
@@ -23,4 +23,18 @@ test('compare', () => {
  + verbose: true
 }`;
   expect(compare(json1, json2)).toBe(expectedResult);
+});
+
+test('compare yml', () => {
+  const yml1 = parse(getFixturePath('file1.yml'));
+  const yml2 = parse(getFixturePath('file2.yml'));
+  const expectedResult = `{
+ - follow: false
+   host: hexlet.io
+ - proxy: 123.234.53.22
+ - timeout: 50
+ + timeout: 20
+ + verbose: true
+}`;
+  expect(compare(yml1, yml2)).toBe(expectedResult);
 });
