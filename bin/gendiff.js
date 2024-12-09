@@ -11,10 +11,11 @@ program
   .version('1.0.0')
   .argument('<filepath1>')
   .argument('<filepath2>')
-  .option('-f, --format [type]', 'output format')
-  .action((path1, path2) => {
+  .option('-f, --format [type]', 'output format', 'stylish')
+  .action((path1, path2, options) => {
     const json1 = parse(path1);
     const json2 = parse(path2);
+    const format = options.format;
     console.log(compare(json1, json2));
   });
 
