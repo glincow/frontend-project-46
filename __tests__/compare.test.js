@@ -65,6 +65,123 @@ Property 'group1.nest' was updated. From [complex value] to 'str'
 Property 'group2' was removed
 Property 'group3' was added with value: [complex value]`;
 
+const expectedResultJson = `[
+  {
+    "key": "common",
+    "type": "nested",
+    "children": [
+      {
+        "key": "follow",
+        "type": "added",
+        "value": false
+      },
+      {
+        "key": "setting1",
+        "type": "unchanged",
+        "value": "Value 1"
+      },
+      {
+        "key": "setting2",
+        "type": "removed",
+        "value": 200
+      },
+      {
+        "key": "setting3",
+        "type": "changed",
+        "oldValue": true,
+        "newValue": null
+      },
+      {
+        "key": "setting4",
+        "type": "added",
+        "value": "blah blah"
+      },
+      {
+        "key": "setting5",
+        "type": "added",
+        "value": {
+          "key5": "value5"
+        }
+      },
+      {
+        "key": "setting6",
+        "type": "nested",
+        "children": [
+          {
+            "key": "doge",
+            "type": "nested",
+            "children": [
+              {
+                "key": "wow",
+                "type": "changed",
+                "oldValue": "",
+                "newValue": "so much"
+              }
+            ]
+          },
+          {
+            "key": "key",
+            "type": "unchanged",
+            "value": "value"
+          },
+          {
+            "key": "ops",
+            "type": "added",
+            "value": "vops"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "key": "group1",
+    "type": "nested",
+    "children": [
+      {
+        "key": "baz",
+        "type": "changed",
+        "oldValue": "bas",
+        "newValue": "bars"
+      },
+      {
+        "key": "foo",
+        "type": "unchanged",
+        "value": "bar"
+      },
+      {
+        "key": "nest",
+        "type": "changed",
+        "oldValue": {
+          "key": "value"
+        },
+        "newValue": "str"
+      }
+    ]
+  },
+  {
+    "key": "group2",
+    "type": "removed",
+    "value": {
+      "abc": 12345,
+      "deep": {
+        "id": 45
+      }
+    }
+  },
+  {
+    "key": "group3",
+    "type": "added",
+    "value": {
+      "deep": {
+        "id": {
+          "number": 45
+        }
+      },
+      "fee": 100500
+    }
+  }
+]`;
+
 test('compare empty objects stylish', () => {
   expect(compare({}, {}, getFormatter('stylish'))).toBe('{\n\n}');
 });
@@ -91,4 +208,16 @@ test('compare yml plain', () => {
   const yml1 = parse(getFixturePath('file1.yml'));
   const yml2 = parse(getFixturePath('file2.yml'));
   expect(compare(yml1, yml2, getFormatter('plain'))).toBe(expectedResultPlain);
+});
+
+test('compare json json', () => {
+  const json1 = parse(getFixturePath('file1.json'));
+  const json2 = parse(getFixturePath('file2.json'));
+  expect(compare(json1, json2, getFormatter('json'))).toBe(expectedResultJson);
+});
+
+test('compare yml json', () => {
+  const yml1 = parse(getFixturePath('file1.yml'));
+  const yml2 = parse(getFixturePath('file2.yml'));
+  expect(compare(yml1, yml2, getFormatter('json'))).toBe(expectedResultJson);
 });
