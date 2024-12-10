@@ -14,3 +14,6 @@
 ### With nested files
 [![asciicast](https://asciinema.org/a/MMkVgt5aY4fZ8hggV3GdOMK1E.svg)](https://asciinema.org/a/MMkVgt5aY4fZ8hggV3GdOMK1E)
 
+### With plain formatter
+[![asciicast](https://asciinema.org/a/JIdBhCsAs1TtRilFxecZXAZJa.svg)](https://asciinema.org/a/JIdBhCsAs1TtRilFxecZXAZJa)
+
