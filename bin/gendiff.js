@@ -2,6 +2,7 @@
 import { Command } from 'commander';
 import parse from '../src/parse.js';
 import compare from '../src/compare.js';
+import getFormatter from '../formatters/index.js';
 
 const program = new Command();
 
@@ -15,8 +16,8 @@ program
   .action((path1, path2, options) => {
     const json1 = parse(path1);
     const json2 = parse(path2);
-    const format = options.format;
-    console.log(compare(json1, json2));
+    const formatter = getFormatter(options.format);
+    console.log(compare(json1, json2, formatter));
   });
 
 program.parse();
