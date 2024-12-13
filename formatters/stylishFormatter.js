@@ -28,7 +28,7 @@ const formatStylish = (diffTree, depth = 0) => {
       case 'nested':
         return `${indent}    ${node.key}: ${formatStylish(node.children, depth + 1)}`;
       default:
-        return null;
+        throw new Error(`Unknown node type: '${node.type}'!`);
     }
   });
 

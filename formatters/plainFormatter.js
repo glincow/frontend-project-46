@@ -26,7 +26,7 @@ const formatPlain = (diffTree, parentPath = '') => {
       case 'unchanged':
         return [];
       default:
-        return null;
+        throw new Error(`Unknown node type: '${node.type}'!`);
     }
   });
 

@@ -1,8 +1,6 @@
 import path, { dirname } from 'path';
 import { fileURLToPath } from 'url';
 import compare from '../src/compare.js';
-import parse from '../src/parse.js';
-import getFormatter from '../formatters/index.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -182,42 +180,26 @@ const expectedResultJson = `[
   }
 ]`;
 
-test('compare empty objects stylish', () => {
-  expect(compare({}, {}, getFormatter('stylish'))).toBe('{\n\n}');
-});
-
 test('compare json stylish', () => {
-  const json1 = parse(getFixturePath('file1.json'));
-  const json2 = parse(getFixturePath('file2.json'));
-  expect(compare(json1, json2, getFormatter('stylish'))).toBe(expectedResultStylish);
+  expect(compare(getFixturePath('file1.json'), getFixturePath('file2.json'), 'stylish')).toBe(expectedResultStylish);
 });
 
 test('compare yml stylish', () => {
-  const yml1 = parse(getFixturePath('file1.yml'));
-  const yml2 = parse(getFixturePath('file2.yml'));
-  expect(compare(yml1, yml2, getFormatter('stylish'))).toBe(expectedResultStylish);
+  expect(compare(getFixturePath('file1.yml'), getFixturePath('file2.yml'), 'stylish')).toBe(expectedResultStylish);
 });
 
 test('compare json plain', () => {
-  const json1 = parse(getFixturePath('file1.json'));
-  const json2 = parse(getFixturePath('file2.json'));
-  expect(compare(json1, json2, getFormatter('plain'))).toBe(expectedResultPlain);
+  expect(compare(getFixturePath('file1.json'), getFixturePath('file2.json'), 'plain')).toBe(expectedResultPlain);
 });
 
 test('compare yml plain', () => {
-  const yml1 = parse(getFixturePath('file1.yml'));
-  const yml2 = parse(getFixturePath('file2.yml'));
-  expect(compare(yml1, yml2, getFormatter('plain'))).toBe(expectedResultPlain);
+  expect(compare(getFixturePath('file1.yml'), getFixturePath('file2.yml'), 'plain')).toBe(expectedResultPlain);
 });
 
 test('compare json json', () => {
-  const json1 = parse(getFixturePath('file1.json'));
-  const json2 = parse(getFixturePath('file2.json'));
-  expect(compare(json1, json2, getFormatter('json'))).toBe(expectedResultJson);
+  expect(compare(getFixturePath('file1.json'), getFixturePath('file2.json'), 'json')).toBe(expectedResultJson);
 });
 
 test('compare yml json', () => {
-  const yml1 = parse(getFixturePath('file1.yml'));
-  const yml2 = parse(getFixturePath('file2.yml'));
-  expect(compare(yml1, yml2, getFormatter('json'))).toBe(expectedResultJson);
+  expect(compare(getFixturePath('file1.yml'), getFixturePath('file2.yml'), 'json')).toBe(expectedResultJson);
 });

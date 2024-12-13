@@ -1,4 +1,6 @@
 import _ from 'lodash';
+import parse from './parse.js';
+import getFormatter from '../formatters/index.js';
 
 const buildDiffTree = (obj1, obj2) => {
   const keys = _.union(Object.keys(obj1), Object.keys(obj2)).sort();
@@ -25,7 +27,10 @@ const buildDiffTree = (obj1, obj2) => {
   });
 };
 
-const compare = (json1, json2, formatter) => {
+const compare = (path1, path2, formatterName) => {
+  const json1 = parse(path1);
+  const json2 = parse(path2);
+  const formatter = getFormatter(formatterName);
   const diffTree = buildDiffTree(json1, json2);
   return formatter(diffTree);
 };

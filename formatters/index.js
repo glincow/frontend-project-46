@@ -11,7 +11,7 @@ const getFormatter = (name) => {
     case 'json':
       return formatJson;
     default:
-      return null;
+      throw new Error(`Unknown formatter name: '${name}'!`);
   }
 };
 
