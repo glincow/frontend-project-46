@@ -3,19 +3,15 @@ import yaml from 'js-yaml';
 import path from 'node:path';
 
 const parse = (inputPath) => {
-  let result = {};
   switch (path.extname(inputPath)) {
     case '.yml':
     case '.yaml':
-      result = yaml.load(readFileSync(inputPath));
-      break;
+      return yaml.load(readFileSync(inputPath));
     case '.json':
-      result = JSON.parse(readFileSync(inputPath));
-      break;
+      return JSON.parse(readFileSync(inputPath));
     default:
-      console.log('This file format is not supported');
+      throw new Error(`Unknown extension name: ${path.extname(inputPath)}!`);
   }
-  return result;
 };
 
 export default parse;
