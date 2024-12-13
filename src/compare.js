@@ -3,7 +3,7 @@ import parse from './parse.js';
 import getFormatter from '../formatters/index.js';
 
 const buildDiffTree = (obj1, obj2) => {
-  const keys = _.union(Object.keys(obj1), Object.keys(obj2)).sort();
+  const keys = _.union(Object.keys(obj1), Object.keys(obj2)).toSorted();
 
   return keys.map((key) => {
     if (!_.has(obj1, key)) {
@@ -28,10 +28,10 @@ const buildDiffTree = (obj1, obj2) => {
 };
 
 const compare = (path1, path2, formatterName) => {
-  const json1 = parse(path1);
-  const json2 = parse(path2);
+  const object1 = parse(path1);
+  const object2 = parse(path2);
   const formatter = getFormatter(formatterName);
-  const diffTree = buildDiffTree(json1, json2);
+  const diffTree = buildDiffTree(object1, object2);
   return formatter(diffTree);
 };
 
